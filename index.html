@@ -3,116 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Surprise 🎉</title>
+    <title>A Birthday Surprise ✨</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
+            background: linear-gradient(135deg, #fef6f7 0%, #fbc4cb 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
             color: #4a4a4a;
+            position: relative;
+            overflow: hidden;
         }
 
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        /* FLOATING HEARTS BACKGROUND EFFECT */
+        .hearts-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 400px;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .heart-particle {
+            position: absolute;
+            display: block;
+            font-size: 20px;
+            color: rgba(255, 71, 126, 0.2);
+            animation: floatUp 6s linear infinite;
+            bottom: -50px;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* STYLISH MAIN CONTAINER */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 35px 25px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(255, 154, 178, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            width: 100%;
+            max-width: 380px;
             text-align: center;
-            transition: all 0.3s ease;
+            z-index: 10;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* CUTE GRAPHICS/GIF BOX */
+        .quiz-gif {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px auto;
+            display: block;
+            object-fit: contain;
         }
 
         h1 {
             color: #ff477e;
-            margin-bottom: 20px;
-            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-size: 1.7rem;
+            letter-spacing: -0.5px;
         }
 
         p {
             margin-bottom: 25px;
-            font-size: 1.1rem;
-            line-height: 1.5;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #625c5e;
         }
 
         .btn-group {
             display: flex;
-            gap: 15px;
-            justify-content: center;
+            gap: 12px;
             flex-direction: column;
         }
 
         button {
-            background: #ff477e;
+            background: linear-gradient(135deg, #ff477e 0%, #ff7096 100%);
             color: white;
             border: none;
-            padding: 14px 28px;
-            font-size: 1rem;
+            padding: 15px;
+            font-size: 1.05rem;
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
-            transition: transform 0.1s, background 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 71, 126, 0.3);
+            transition: all 0.2s ease;
             width: 100%;
         }
 
-        button:hover {
-            background: #ff5c8a;
-        }
-
         button:active {
-            transform: scale(0.98);
+            transform: scale(0.96);
+            box-shadow: 0 2px 8px rgba(255, 71, 126, 0.3);
         }
 
         button.secondary {
-            background: #f0f0f0;
-            color: #666;
+            background: transparent;
+            border: 2px solid #ffb3c6;
+            color: #ff477e;
+            box-shadow: none;
         }
 
-        button.secondary:hover {
-            background: #e5e5e5;
-        }
-
-        .hidden {
-            display: none !important;
-        }
+        .hidden { display: none !important; }
 
         .letter-text {
             text-align: left;
             white-space: pre-line;
             font-size: 1rem;
+            line-height: 1.7;
             color: #555;
-            background: #fff0f3;
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 4px solid #ff477e;
+            background: rgba(255, 240, 243, 0.7);
+            padding: 22px;
+            border-radius: 16px;
+            border: 1px dashed #ff477e;
+            max-height: 250px;
+            overflow-y: auto;
         }
     </style>
 </head>
 <body>
 
+    <!-- BACKGROUND HEARTS ELEMENTS -->
+    <div class="hearts-bg">
+        <span class="heart-particle" style="left: 10%; animation-delay: 0s; animation-duration: 7s;">💖</span>
+        <span class="heart-particle" style="left: 30%; animation-delay: 2s; animation-duration: 6s;">✨</span>
+        <span class="heart-particle" style="left: 55%; animation-delay: 1s; animation-duration: 8s;">❤️</span>
+        <span class="heart-particle" style="left: 80%; animation-delay: 4s; animation-duration: 5s;">🌸</span>
+    </div>
+
     <!-- SCREEN 1: INTRO -->
     <div id="screen-intro" class="card">
-        <h1>Hey You! 👀</h1>
-        <p>Your birthday adventure awaits. A tiny game about us stands between you and your gift. Do you want to continue?</p>
+        <!-- Tip: Swap the src URL below with any cute GIF link from Giphy or Tenor! -->
+        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW9zN3R5M3g0YmpxbW16eGkxMHp2Z3Fnd3Y4M3RndXNtcW90Zms3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/bZ7Uv6KcoI0vR6zBwO/giphy.gif" alt="Hearts Animation">
+        <h1>Your Game Awaits ✨</h1>
+        <p>A short quiz about us stands between you and your birthday surprise. Ready to play?</p>
         <div class="btn-group">
-            <button onclick="nextScreen('screen-intro', 'screen-q1')">Yes, let's do it! 🚀</button>
-            <button class="secondary" onclick="funnyRefusal()">No way 🛑</button>
+            <button onclick="nextScreen('screen-intro', 'screen-q1')">Let's do it! 🚀</button>
+            <button class="secondary" onclick="funnyRefusal()">No thanks 🛑</button>
         </div>
     </div>
 
     <!-- SCREEN 2: QUESTION 1 -->
     <div id="screen-q1" class="card hidden">
-        <h1>Question 1 🧠</h1>
+        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWdtczg5bDBpM2sycW04YmtvMXNma2xxZTZidTBlMTU4NXYxb2k3ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/XgXp0fId8p65Uas99e/giphy.gif" alt="Thinking GIF">
+        <h1>Question 1 🤔</h1>
         <p>Where did we first meet / hang out properly?</p>
         <div class="btn-group">
             <button onclick="wrongAnswer()">Option A (Change this)</button>
@@ -123,6 +178,7 @@
 
     <!-- SCREEN 3: QUESTION 2 -->
     <div id="screen-q2" class="card hidden">
+        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcTBicmJhN3gzcnNjcWh5YTh6cmtzMDBkM3k5Zms2YndmNGtuaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/elPffb8D6L9vG/giphy.gif" alt="Food GIF">
         <h1>Question 2 🍕</h1>
         <p>What is my absolute favorite/least favorite food habit of yours?</p>
         <div class="btn-group">
@@ -134,6 +190,7 @@
 
     <!-- SCREEN 4: QUESTION 3 -->
     <div id="screen-q3" class="card hidden">
+        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHI3OGV3OXVlbW1nNmZidDRpdGZzOTdrZHExbzI4MWExOTQwa3J0bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/vN59S4oV7f2wB88oas/giphy.gif" alt="Laughing GIF">
         <h1>Final Question! 🔎</h1>
         <p>What is the one inside joke we say completely too often?</p>
         <div class="btn-group">
@@ -145,14 +202,15 @@
 
     <!-- SCREEN 5: SUCCESS & LETTER -->
     <div id="screen-success" class="card hidden">
-        <h1>You Win! 👑</h1>
-        <p>Perfect score! (As if there was ever any doubt.) Here is your prize:</p>
+        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDVjOW90Ynp2NW5hbTdnYzM4aGg0eW5vOTVlYndndGdybW1wdmFzZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/u0S69g6T4p1Z28lD0L/giphy.gif" alt="Celebrate GIF">
+        <h1>You Won! 👑</h1>
+        <p>Here is your birthday letter:</p>
         <div class="letter-text">
             Happy Birthday! 🎂
 
-            Insert your heartfelt letter, birthday wish, or clues to her actual physical gift right here. 
+            Type out your long, meaningful message right here. 
             
-            You can make this as long as you want!
+            Because the box template has a tiny built-in scroll bar, you can write as much background context or sweet thoughts as you want without breaking the screen layout!
         </div>
     </div>
 
@@ -163,11 +221,11 @@
         }
 
         function funnyRefusal() {
-            alert("Wrong answer! Try clicking the other button. 😉");
+            alert("Computer says no! You have to tap the other button. 😉");
         }
 
         function wrongAnswer() {
-            alert("Oof, close but try again! I know you know this one.");
+            alert("Aww, incorrect! Try another choice.");
         }
     </script>
 </body>
