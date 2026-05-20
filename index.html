@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Surprise 🎉</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #4a4a4a;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            color: #ff477e;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        button {
+            background: #ff477e;
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.1s, background 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #ff5c8a;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button.secondary {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        button.secondary:hover {
+            background: #e5e5e5;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .letter-text {
+            text-align: left;
+            white-space: pre-line;
+            font-size: 1rem;
+            color: #555;
+            background: #fff0f3;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #ff477e;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SCREEN 1: INTRO -->
+    <div id="screen-intro" class="card">
+        <h1>Hey You! 👀</h1>
+        <p>Your birthday adventure awaits. A tiny game about us stands between you and your gift. Do you want to continue?</p>
+        <div class="btn-group">
+            <button onclick="nextScreen('screen-intro', 'screen-q1')">Yes, let's do it! 🚀</button>
+            <button class="secondary" onclick="funnyRefusal()">No way 🛑</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 2: QUESTION 1 -->
+    <div id="screen-q1" class="card hidden">
+        <h1>Question 1 🧠</h1>
+        <p>Where did we first meet / hang out properly?</p>
+        <div class="btn-group">
+            <button onclick="wrongAnswer()">Option A (Change this)</button>
+            <button onclick="nextScreen('screen-q1', 'screen-q2')">The Correct Place 🎉</button>
+            <button onclick="wrongAnswer()">Option C (Change this)</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 3: QUESTION 2 -->
+    <div id="screen-q2" class="card hidden">
+        <h1>Question 2 🍕</h1>
+        <p>What is my absolute favorite/least favorite food habit of yours?</p>
+        <div class="btn-group">
+            <button onclick="nextScreen('screen-q2', 'screen-q3')">The Real Answer 🏆</button>
+            <button onclick="wrongAnswer()">A Fake Answer</button>
+            <button onclick="wrongAnswer()">Another Fake Answer</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 4: QUESTION 3 -->
+    <div id="screen-q3" class="card hidden">
+        <h1>Final Question! 🔎</h1>
+        <p>What is the one inside joke we say completely too often?</p>
+        <div class="btn-group">
+            <button onclick="wrongAnswer()">Wrong Joke</button>
+            <button onclick="wrongAnswer()">Different Joke</button>
+            <button onclick="nextScreen('screen-q3', 'screen-success')">Our Main Inside Joke ❤️</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 5: SUCCESS & LETTER -->
+    <div id="screen-success" class="card hidden">
+        <h1>You Win! 👑</h1>
+        <p>Perfect score! (As if there was ever any doubt.) Here is your prize:</p>
+        <div class="letter-text">
+            Happy Birthday! 🎂
+
+            Insert your heartfelt letter, birthday wish, or clues to her actual physical gift right here. 
+            
+            You can make this as long as you want!
+        </div>
+    </div>
+
+    <script>
+        function nextScreen(currentId, nextId) {
+            document.getElementById(currentId).classList.add('hidden');
+            document.getElementById(nextId).classList.remove('hidden');
+        }
+
+        function funnyRefusal() {
+            alert("Wrong answer! Try clicking the other button. 😉");
+        }
+
+        function wrongAnswer() {
+            alert("Oof, close but try again! I know you know this one.");
+        }
+    </script>
+</body>
+</html>
