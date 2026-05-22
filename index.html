@@ -39,15 +39,15 @@
 
         /* STYLISH MAIN CONTAINER */
         .card {
-            background: rgba(255, 255, 255, 0.82);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 35px 25px;
+            padding: 30px 20px;
             border-radius: 24px;
             box-shadow: 0 15px 35px rgba(255, 154, 178, 0.25);
             border: 1px solid rgba(255, 255, 255, 0.6);
             width: 100%;
-            max-width: 380px;
+            max-width: 400px;
             text-align: center;
             z-index: 10;
             animation: fadeIn 0.5s ease-out;
@@ -58,7 +58,158 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* CUTE GRAPHICS/GIF BOX */
+        /* --- THE ARTISANAL PURE CSS HIPPO & BOARD --- */
+        .hippo-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        /* Hippo Head Base */
+        .hippo-head {
+            width: 110px;
+            height: 100px;
+            background: #8fa3b4;
+            border-radius: 50% 50% 45% 45%;
+            position: absolute;
+            bottom: 100px;
+            z-index: 2;
+            box-shadow: inset -6px -6px 0px rgba(0,0,0,0.1);
+        }
+
+        /* Muzzle/Snout */
+        .hippo-snout {
+            width: 124px;
+            height: 65px;
+            background: #a3b8cc;
+            border-radius: 50px;
+            position: absolute;
+            bottom: 90px;
+            z-index: 4;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Nostrils */
+        .hippo-snout::before, .hippo-snout::after {
+            content: '';
+            width: 10px;
+            height: 14px;
+            background: #687888;
+            border-radius: 50%;
+            margin: 0 18px;
+        }
+
+        /* Ears */
+        .hippo-ear {
+            width: 26px;
+            height: 26px;
+            background: #8fa3b4;
+            border-radius: 50%;
+            position: absolute;
+            top: -6px;
+            z-index: 1;
+        }
+        .hippo-ear.left { left: 10px; }
+        .hippo-ear.right { right: 10px; }
+        .hippo-ear::after {
+            content: '';
+            width: 14px;
+            height: 14px;
+            background: #ffb6c1;
+            border-radius: 50%;
+            position: absolute;
+            top: 6px;
+            left: 6px;
+        }
+
+        /* Eyes */
+        .hippo-eye {
+            width: 12px;
+            height: 12px;
+            background: #2c3e50;
+            border-radius: 50%;
+            position: absolute;
+            top: 35px;
+            z-index: 3;
+        }
+        .hippo-eye.left { left: 30px; }
+        .hippo-eye.right { right: 30px; }
+        .hippo-eye::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+        }
+
+        /* Blush Cheeks */
+        .hippo-blush {
+            width: 16px;
+            height: 10px;
+            background: rgba(255, 105, 180, 0.4);
+            border-radius: 50%;
+            position: absolute;
+            top: 50px;
+            z-index: 3;
+        }
+        .hippo-blush.left { left: 12px; }
+        .hippo-blush.right { right: 12px; }
+
+        /* The Board holding the Invitation Text */
+        .wooden-board {
+            width: 100%;
+            background: #fffdf6;
+            border: 8px solid #a0522d; /* Wooden Frame Border */
+            border-radius: 16px;
+            padding: 20px 15px;
+            z-index: 5;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            position: relative;
+            transform: translateY(15px);
+        }
+
+        /* Little Hippo Hands Poking Over the Board Frame */
+        .hippo-hand {
+            width: 24px;
+            height: 24px;
+            background: #8fa3b4;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            top: -16px;
+            z-index: 6;
+            box-shadow: inset 0 2px 3px rgba(255,255,255,0.2);
+        }
+        .hippo-hand.left { left: 40px; }
+        .hippo-hand.right { right: 40px; }
+
+
+        /* TEXT DESIGN INSIDE BOARD & SCREENS */
+        .board-title {
+            color: #b22222;
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .board-caption {
+            font-size: 1rem;
+            color: #5d514a;
+            line-height: 1.5;
+            font-weight: 600;
+        }
+
         .quiz-gif {
             width: 120px;
             height: 120px;
@@ -82,10 +233,20 @@
             font-weight: 500;
         }
 
+        /* Dynamic inline messaging wrapper */
+        .hint-text {
+            color: #ff477e;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+            min-height: 22px;
+        }
+
         .btn-group {
             display: flex;
             gap: 12px;
             flex-direction: column;
+            width: 100%;
         }
 
         button {
@@ -182,13 +343,30 @@
     <canvas id="sparkle-canvas"></canvas>
     <canvas id="confetti-canvas"></canvas>
 
-    <!-- SCREEN 1: INTRO -->
+    <!-- SCREEN 1: INTRO (WITH LANDMARK HIPPO BOARD) -->
     <div id="screen-intro" class="card">
-        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW9zN3R5M3g0YmpxbW16eGkxMHp2Z3Fnd3Y4M3RndXNtcW90Zms3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/bZ7Uv6KcoI0vR6zBwO/giphy.gif" alt="Hearts Animation">
-        <h1>Happy Birthday bby! ✨</h1>
-        <p>If you win, you get a gift! Ready to start?</p>
+        <div class="hippo-container">
+            <div class="hippo-head">
+                <div class="hippo-ear left"></div>
+                <div class="hippo-ear right"></div>
+                <div class="hippo-eye left"></div>
+                <div class="hippo-eye right"></div>
+                <div class="hippo-blush left"></div>
+                <div class="hippo-blush right"></div>
+            </div>
+            <div class="hippo-snout"></div>
+            
+            <!-- The Board Structure -->
+            <div class="wooden-board">
+                <div class="hippo-hand left"></div>
+                <div class="hippo-hand right"></div>
+                <h2 class="board-title">Happy Birthday, <br>MY RUBY! ❤️</h2>
+                <p class="board-caption">Are you ready for your surprise? A perfect score wins a real gift! 👇</p>
+            </div>
+        </div>
+
         <div class="btn-group">
-            <button onclick="nextScreen('screen-intro', 'screen-q1')">Let's play! 🚀</button>
+            <button onclick="nextScreen('screen-intro', 'screen-q1')">LET'S BEGIN THE QUIZ! 🚀</button>
         </div>
     </div>
 
@@ -196,11 +374,12 @@
     <div id="screen-q1" class="card hidden">
         <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWdtczg5bDBpM2sycW04YmtvMXNma2xxZTZidTBlMTU4NXYxb2k3ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/XgXp0fId8p65Uas99e/giphy.gif" alt="Thinking GIF">
         <h1>Question 1 🤔</h1>
-        <p>Are you the best?</p>
+        <p>Are you the absolute best?</p>
+        <div class="hint-text" id="hint-q1"></div>
         <div class="btn-group">
-            <button onclick="wrongAnswer()">IDK</button>
-            <button onclick="handleCorrectAnswer('screen-q1', 'screen-q2')">DEFINITELY</button>
-            <button onclick="wrongAnswer()">Maybe</button>
+            <button onclick="wrongAnswer('hint-q1', 'Hmm... think about it again! 😜')">IDK</button>
+            <button onclick="handleCorrectAnswer('screen-q1', 'screen-q2')">DEFINITELY 👑</button>
+            <button onclick="wrongAnswer('hint-q1', 'Not quite! Try the middle one...')">Maybe</button>
         </div>
     </div>
 
@@ -209,10 +388,11 @@
         <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcTBicmJhN3gzcnNjcWh5YTh6cmtzMDBkM3k5Zms2YndmNGtuaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/elPffb8D6L9vG/giphy.gif" alt="Date GIF">
         <h1>Question 2 🌹</h1>
         <p>Would you go on a date with me?</p>
+        <div class="hint-text" id="hint-q2"></div>
         <div class="btn-group">
-            <button onclick="wrongAnswer()">No</button>
-            <button onclick="wrongAnswer()">Maybe</button>
-            <button onclick="handleCorrectAnswer('screen-q2', 'screen-q3')">ABSOLUTELY</button>
+            <button onclick="wrongAnswer('hint-q2', 'Wrong answer! Try again. 👀')">No</button>
+            <button onclick="wrongAnswer('hint-q2', 'No partial points allowed!')">Maybe</button>
+            <button onclick="handleCorrectAnswer('screen-q2', 'screen-q3')">ABSOLUTELY 😍</button>
         </div>
     </div>
 
@@ -221,18 +401,19 @@
         <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHI3OGV3OXVlbW1nNmZidDRpdGZzOTdrZHExbzI4MWExOTQwa3J0bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/vN59S4oV7f2wB88oas/giphy.gif" alt="Love GIF">
         <h1>Final Question! 💓</h1>
         <p>Do I love you so much?</p>
+        <div class="hint-text" id="hint-q3"></div>
         <div class="btn-group">
-            <button onclick="wrongAnswer()">Yes</button>
-            <button onclick="wrongAnswer()">Yes</button>
-            <button onclick="handleCorrectAnswer('screen-q3', 'screen-gift')">YES!!</button>
+            <button onclick="wrongAnswer('hint-q3', 'Way more than that! Try again.')">Yes</button>
+            <button onclick="wrongAnswer('hint-q3', 'Still too small! Go bigger! 🔥')">Yes!!</button>
+            <button onclick="handleCorrectAnswer('screen-q3', 'screen-gift')">YES, INFINITELY!! ♾️</button>
         </div>
     </div>
 
     <!-- SCREEN 5: UNOPENED GIFT BOX -->
     <div id="screen-gift" class="card hidden">
         <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDVjOW90Ynp2NW5hbTdnYzM4aGg0eW5vOTVlYndndGdybW1wdmFzZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/u0S69g6T4p1Z28lD0L/giphy.gif" alt="Celebrate GIF">
-        <h1>You Won! 👑</h1>
-        <p>You got a perfect score! Tap below to uncover your gift box...</p>
+        <h1>You Won! 🏆</h1>
+        <p>You got a perfect score! Tap below to open your gift box...</p>
         
         <div class="gift-container" onclick="openGift()">
             <span class="gift-box" id="gift-icon">🎁</span>
@@ -255,14 +436,16 @@
     </div>
 
     <script>
-        // Core view switching
+        // Core view switching logic
         function nextScreen(currentId, nextId) {
             document.getElementById(currentId).classList.add('hidden');
             document.getElementById(nextId).classList.remove('hidden');
         }
 
-        function wrongAnswer() {
-            alert("Aww, incorrect! Think again. 😉");
+        // Inline smooth wrong answer system
+        function wrongAnswer(hintId, message) {
+            const hintElement = document.getElementById(hintId);
+            hintElement.innerText = message;
         }
 
         // Triggers confetti shower and switches screen after a small visual delay
@@ -275,7 +458,7 @@
 
         function openGift() {
             document.getElementById('gift-icon').innerHTML = "🔓";
-            triggerConfettiBurst(); // Extra celebration burst on open
+            triggerConfettiBurst(); 
             setTimeout(function() {
                 nextScreen('screen-gift', 'screen-reveal');
             }, 400);
@@ -314,7 +497,6 @@
                 sCtx.beginPath();
                 sCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
                 
-                // Creates a dreamy blurred look
                 let gradient = sCtx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.radius);
                 gradient.addColorStop(0, `rgba(255, 230, 235, ${s.alpha})`);
                 gradient.addColorStop(0.4, `rgba(255, 180, 195, ${s.alpha * 0.4})`);
@@ -340,7 +522,6 @@
             
             const colors = ['#ff477e', '#ff7096', '#ffb3c6', '#ffd000', '#4cd137', '#00a8ff'];
             
-            // Inject new batch of falling ribbons
             for (let i = 0; i < 75; i++) {
                 confettiParticles.push({
                     x: Math.random() * confettiCanvas.width,
@@ -375,7 +556,6 @@
                 cCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
                 cCtx.restore();
                 
-                // Clear single entities once they fly off base frame
                 if (p.y > confettiCanvas.height) {
                     confettiParticles.splice(index, 1);
                 }
