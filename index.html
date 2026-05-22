@@ -3,553 +3,584 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday! 🦛🎉</title>
+    <title>A Birthday Surprise ✨</title>
     <style>
-        /* --- Core Styling --- */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         body {
-            background-color: #d1d5db; /* Clean Grey Background */
+            background: linear-gradient(135deg, #fef6f7 0%, #fbc4cb 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
             padding: 20px;
-        }
-
-        .card-container {
-            background: #ffffff;
-            width: 100%;
-            max-width: 450px;
-            min-height: 550px;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            color: #4a4a4a;
             position: relative;
-            z-index: 10;
+            overflow: hidden;
         }
 
-        .hidden {
-            display: none !important;
-        }
-
-        /* --- Hippo Vector Art Styles --- */
-        .hippo-wrapper {
-            position: relative;
-            width: 180px;
-            height: 170px;
-            margin-bottom: -10px;
-        }
-
-        .hippo-head {
-            width: 140px;
-            height: 120px;
-            background: #9ca3af;
-            border-radius: 70px 70px 60px 60px;
-            position: absolute;
-            left: 20px;
-            top: 20px;
-            box-shadow: inset -10px -10px 0 rgba(0,0,0,0.08);
-        }
-
-        .hippo-ear-l, .hippo-ear-r {
-            width: 30px;
-            height: 35px;
-            background: #9ca3af;
-            border-radius: 50%;
-            position: absolute;
-            top: 5px;
-        }
-        .hippo-ear-l { left: 25px; transform: rotate(-20px); }
-        .hippo-ear-r { right: 25px; transform: rotate(20px); }
-        
-        .hippo-ear-inner {
-            width: 16px;
-            height: 22px;
-            background: #fca5a5;
-            border-radius: 50%;
-            margin: 6px auto 0;
-        }
-
-        .hippo-eye-l, .hippo-eye-r {
-            width: 16px;
-            height: 20px;
-            background: #1f2937;
-            border-radius: 50%;
-            position: absolute;
-            top: 45px;
-        }
-        .hippo-eye-l { left: 45px; }
-        .hippo-eye-r { right: 45px; }
-        
-        .hippo-pupil {
-            width: 5px;
-            height: 5px;
-            background: white;
-            border-radius: 50%;
-            margin: 3px 0 0 3px;
-        }
-
-        .hippo-snout {
-            width: 150px;
-            height: 75px;
-            background: #babfc7;
-            border-radius: 40px;
-            position: absolute;
-            bottom: -5px;
-            left: -5px;
-            box-shadow: inset -5px -5px 0 rgba(0,0,0,0.05);
-        }
-
-        .hippo-nostril-l, .hippo-nostril-r {
-            width: 12px;
-            height: 16px;
-            background: #717680;
-            border-radius: 50%;
-            position: absolute;
-            top: 22px;
-        }
-        .hippo-nostril-l { left: 45px; transform: rotate(-10deg); }
-        .hippo-nostril-r { right: 45px; transform: rotate(10deg); }
-
-        .hippo-smile {
-            width: 60px;
-            height: 20px;
-            border-bottom: 4px solid #4b5563;
-            border-radius: 0 0 30px 30px;
-            position: absolute;
-            bottom: 12px;
-            left: 45px;
-        }
-
-        /* --- Board Design --- */
-        .notice-board {
-            background: #374151;
-            border: 12px solid #854d0e;
-            border-radius: 12px;
-            width: 100%;
-            padding: 25px 15px;
-            color: #f9fafb;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            margin-top: 15px;
-            margin-bottom: 25px;
-        }
-
-        .board-text {
-            font-size: 22px;
-            font-weight: bold;
-            line-height: 1.5;
-            letter-spacing: 0.5px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        /* --- Interactive UI Elements --- */
-        .btn {
-            background: #ec4899;
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            width: 100%;
-            margin-bottom: 12px;
-            box-shadow: 0 4px 10px rgba(236, 72, 153, 0.3);
-            transition: all 0.2s ease;
-        }
-
-        .btn:hover {
-            background: #f472b6;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(236, 72, 153, 0.4);
-        }
-
-        .btn:active {
-            transform: translateY(1px);
-        }
-
-        .question-title {
-            font-size: 24px;
-            color: #1f2937;
-            margin-bottom: 30px;
-            font-weight: 700;
-        }
-
-        /* --- 3D Gift Box Animation Setup --- */
-        .gift-container {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            margin: 25px auto;
-            cursor: pointer;
-            perspective: 600px;
-        }
-
-        .gift-box {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            animation: bounceGift 1.5s infinite alternate ease-in-out;
-        }
-
-        .gift-lid {
-            width: 150px;
-            height: 35px;
-            background: #ef4444;
-            position: absolute;
-            top: 0;
-            left: -5px;
-            z-index: 2;
-            border-radius: 4px;
-            box-shadow: 0 4px 5px rgba(0,0,0,0.1);
-            transition: transform 0.5s ease;
-        }
-
-        .gift-body {
-            width: 140px;
-            height: 105px;
-            background: #dc2626;
-            position: absolute;
-            bottom: 0;
-            border-radius: 0 0 8px 8px;
-        }
-
-        .gift-bow {
-            width: 40px;
-            height: 40px;
-            background: #facc15;
-            position: absolute;
-            top: -25px;
-            left: 50px;
-            border-radius: 50% 50% 0 50%;
-            transform: rotate(-45deg);
-        }
-        .gift-bow::after {
-            content: '';
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: #facc15;
-            border-radius: 50% 50% 50% 0;
-            transform: rotate(90deg);
-            left: 15px;
-            top: 15px;
-        }
-
-        .ribbon-v {
-            width: 24px;
-            height: 100%;
-            background: #facc15;
-            position: absolute;
-            left: 58px;
-            top: 0;
-        }
-
-        .ribbon-h {
-            width: 100%;
-            height: 20px;
-            background: #facc15;
-            position: absolute;
-            top: 40px;
-            left: 0;
-        }
-
-        /* Open Gift State Trigger */
-        .gift-container.opened .gift-lid {
-            transform: translateY(-60px) rotate(-25deg) scale(0.9);
-            opacity: 0;
-        }
-
-        @keyframes bounceGift {
-            0% { transform: translateY(0) scale(1); }
-            100% { transform: translateY(-8px) scale(1.03); }
-        }
-
-        /* --- Bubble Font Celebration --- */
-        .bubble-wish {
-            font-family: 'Arial Black', Gadget, sans-serif;
-            font-size: 32px;
-            font-weight: 900;
-            text-transform: uppercase;
-            background: linear-gradient(to right, #ec4899, #8b5cf6, #3b82f6, #10b981, #f59e0b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 15px;
-            letter-spacing: 1px;
-            animation: rainbowText 4s infinite linear;
-            line-height: 1.3;
-        }
-
-        @keyframes rainbowText {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        /* Canvas Particle Layer overlay */
-        canvas {
+        /* CANVAS OVERLAYS FOR PARTICLES */
+        #sparkle-canvas, #confetti-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 99;
+        }
+        
+        #sparkle-canvas { z-index: 1; }
+        #confetti-canvas { z-index: 100; }
+
+        /* STYLISH MAIN CONTAINER */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 30px 20px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(255, 154, 178, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            z-index: 10;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- THE ARTISANAL PURE CSS HIPPO & BOARD --- */
+        .hippo-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        /* Hippo Head Base */
+        .hippo-head {
+            width: 110px;
+            height: 100px;
+            background: #8fa3b4;
+            border-radius: 50% 50% 45% 45%;
+            position: absolute;
+            bottom: 100px;
+            z-index: 2;
+            box-shadow: inset -6px -6px 0px rgba(0,0,0,0.1);
+        }
+
+        /* Muzzle/Snout */
+        .hippo-snout {
+            width: 124px;
+            height: 65px;
+            background: #a3b8cc;
+            border-radius: 50px;
+            position: absolute;
+            bottom: 90px;
+            z-index: 4;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Nostrils */
+        .hippo-snout::before, .hippo-snout::after {
+            content: '';
+            width: 10px;
+            height: 14px;
+            background: #687888;
+            border-radius: 50%;
+            margin: 0 18px;
+        }
+
+        /* Ears */
+        .hippo-ear {
+            width: 26px;
+            height: 26px;
+            background: #8fa3b4;
+            border-radius: 50%;
+            position: absolute;
+            top: -6px;
+            z-index: 1;
+        }
+        .hippo-ear.left { left: 10px; }
+        .hippo-ear.right { right: 10px; }
+        .hippo-ear::after {
+            content: '';
+            width: 14px;
+            height: 14px;
+            background: #ffb6c1;
+            border-radius: 50%;
+            position: absolute;
+            top: 6px;
+            left: 6px;
+        }
+
+        /* Eyes */
+        .hippo-eye {
+            width: 12px;
+            height: 12px;
+            background: #2c3e50;
+            border-radius: 50%;
+            position: absolute;
+            top: 35px;
+            z-index: 3;
+        }
+        .hippo-eye.left { left: 30px; }
+        .hippo-eye.right { right: 30px; }
+        .hippo-eye::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+        }
+
+        /* Blush Cheeks */
+        .hippo-blush {
+            width: 16px;
+            height: 10px;
+            background: rgba(255, 105, 180, 0.4);
+            border-radius: 50%;
+            position: absolute;
+            top: 50px;
+            z-index: 3;
+        }
+        .hippo-blush.left { left: 12px; }
+        .hippo-blush.right { right: 12px; }
+
+        /* The Board holding the Invitation Text */
+        .wooden-board {
+            width: 100%;
+            background: #fffdf6;
+            border: 8px solid #a0522d; /* Wooden Frame Border */
+            border-radius: 16px;
+            padding: 20px 15px;
+            z-index: 5;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            position: relative;
+            transform: translateY(15px);
+        }
+
+        /* Little Hippo Hands Poking Over the Board Frame */
+        .hippo-hand {
+            width: 24px;
+            height: 24px;
+            background: #8fa3b4;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            top: -16px;
+            z-index: 6;
+            box-shadow: inset 0 2px 3px rgba(255,255,255,0.2);
+        }
+        .hippo-hand.left { left: 40px; }
+        .hippo-hand.right { right: 40px; }
+
+
+        /* TEXT DESIGN INSIDE BOARD & SCREENS */
+        .board-title {
+            color: #b22222;
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .board-caption {
+            font-size: 1rem;
+            color: #5d514a;
+            line-height: 1.5;
+            font-weight: 600;
+        }
+
+        .quiz-gif {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        h1 {
+            color: #ff477e;
+            margin-bottom: 15px;
+            font-size: 1.7rem;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #554e50;
+            font-weight: 500;
+        }
+
+        /* Dynamic inline messaging wrapper */
+        .hint-text {
+            color: #ff477e;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+            min-height: 22px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        button {
+            background: linear-gradient(135deg, #ff477e 0%, #ff7096 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 71, 126, 0.3);
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        button:active {
+            transform: scale(0.96);
+            box-shadow: 0 2px 8px rgba(255, 71, 126, 0.3);
+        }
+
+        .hidden { display: none !important; }
+
+        /* GIFT BOX ANIMATION EFFECTS */
+        .gift-container {
+            margin: 20px auto;
+            cursor: pointer;
+            position: relative;
+            width: 110px;
+            height: 110px;
+        }
+
+        .gift-box {
+            font-size: 85px;
+            line-height: 1;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .gift-container:hover .gift-box {
+            animation: wobble 0.5s ease infinite alternate;
+        }
+
+        @keyframes wobble {
+            0% { transform: rotate(-8deg); }
+            100% { transform: rotate(8deg); }
+        }
+
+        /* FINAL WISH PAGE STYLING */
+        .letter-page {
+            background: #fffdf9;
+            background-image: linear-gradient(#e7eff7 1px, transparent 1px);
+            background-size: 100% 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            padding: 35px 20px;
+            border: 1px solid #f1eae0;
+            position: relative;
+            animation: openLetter 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes openLetter {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .love-message {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.7;
+            color: #d93866;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
+            word-wrap: break-word;
+        }
+
+        .highlight-name {
+            display: block;
+            font-size: 1.9rem;
+            color: #ff1c5c;
+            margin-top: 12px;
+            letter-spacing: 1px;
+            animation: pulseText 1.5s infinite alternate;
+        }
+
+        @keyframes pulseText {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.04); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Celebration Animation Layer -->
-    <canvas id="canvas"></canvas>
+    <!-- BACKGROUND SPARKLES & FOREGROUND CONFETTI OVERLAYS -->
+    <canvas id="sparkle-canvas"></canvas>
+    <canvas id="confetti-canvas"></canvas>
 
-    <div class="card-container">
-        
-        <!-- ================= PAGE 1: START SCREEN ================= -->
-        <div id="page-1" class="page-view">
-            <!-- Vector Hippo Setup -->
-            <div class="hippo-wrapper">
-                <div class="hippo-ear-l"><div class="hippo-ear-inner"></div></div>
-                <div class="hippo-ear-r"><div class="hippo-ear-inner"></div></div>
-                <div class="hippo-head">
-                    <div class="hippo-eye-l"><div class="hippo-pupil"></div></div>
-                    <div class="hippo-eye-r"><div class="hippo-pupil"></div></div>
-                    <div class="hippo-snout">
-                        <div class="hippo-nostril-l"></div>
-                        <div class="hippo-nostril-r"></div>
-                        <div class="hippo-smile"></div>
-                    </div>
-                </div>
+    <!-- SCREEN 1: INTRO (WITH LANDMARK HIPPO BOARD) -->
+    <div id="screen-intro" class="card">
+        <div class="hippo-container">
+            <div class="hippo-head">
+                <div class="hippo-ear left"></div>
+                <div class="hippo-ear right"></div>
+                <div class="hippo-eye left"></div>
+                <div class="hippo-eye right"></div>
+                <div class="hippo-blush left"></div>
+                <div class="hippo-blush right"></div>
             </div>
-
-            <!-- Blackboard Sign -->
-            <div class="notice-board">
-                <div class="board-text">Happy Birthday hun!<br>Let's start!</div>
-            </div>
-
-            <button class="btn" onclick="actionStartQuiz()">Let's start</button>
-        </div>
-
-        <!-- ================= PAGE 2: INTERACTIVE QUESTIONS ================= -->
-        <div id="page-2" class="page-view hidden">
-            <h2 class="question-title" id="display-question">Question Text Here</h2>
-            <div id="display-options-box" style="width: 100%;">
-                <!-- Dynamic options injected here -->
+            <div class="hippo-snout"></div>
+            
+            <!-- The Board Structure -->
+            <div class="wooden-board">
+                <div class="hippo-hand left"></div>
+                <div class="hippo-hand right"></div>
+                <h2 class="board-title">Happy Birthday, <br>MY RUBY! ❤️</h2>
+                <p class="board-caption">Are you ready for your surprise? A perfect score wins a real gift! 👇</p>
             </div>
         </div>
 
-        <!-- ================= PAGE 3: FINAL CELEBRATORY SCREEN ================= -->
-        <div id="page-3" class="page-view hidden">
-            <!-- Hippo Component Redrawn for End Page -->
-            <div class="hippo-wrapper" style="transform: scale(0.85); margin-bottom: -20px;">
-                <div class="hippo-ear-l"><div class="hippo-ear-inner"></div></div>
-                <div class="hippo-ear-r"><div class="hippo-ear-inner"></div></div>
-                <div class="hippo-head">
-                    <div class="hippo-eye-l"><div class="hippo-pupil"></div></div>
-                    <div class="hippo-eye-r"><div class="hippo-pupil"></div></div>
-                    <div class="hippo-snout">
-                        <div class="hippo-nostril-l"></div>
-                        <div class="hippo-nostril-r"></div>
-                        <div class="hippo-smile"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Clickable Interactive 3D Gift -->
-            <div class="gift-container" id="clickable-gift" onclick="actionRevealGift()">
-                <div class="gift-box">
-                    <div class="gift-bow"></div>
-                    <div class="gift-lid">
-                        <div class="ribbon-v" style="left: 63px;"></div>
-                    </div>
-                    <div class="gift-body">
-                        <div class="ribbon-v"></div>
-                        <div class="ribbon-h"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Interaction Label / Reward Banner -->
-            <button class="btn" id="gift-action-btn" onclick="actionRevealGift()">🎁 Click Box to Open!</button>
-            <div class="bubble-wish hidden" id="final-bubble-text">HAPPY BIRTHDAY MY LOVE</div>
+        <div class="btn-group">
+            <button onclick="nextScreen('screen-intro', 'screen-q1')">LET'S BEGIN THE QUIZ! 🚀</button>
         </div>
-
     </div>
 
-    <!-- --- Interactivity Engine --- -->
+    <!-- SCREEN 2: QUESTION 1 -->
+    <div id="screen-q1" class="card hidden">
+        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWdtczg5bDBpM2sycW04YmtvMXNma2xxZTZidTBlMTU4NXYxb2k3ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/XgXp0fId8p65Uas99e/giphy.gif" alt="Thinking GIF">
+        <h1>Question 1 🤔</h1>
+        <p>Are you the absolute best?</p>
+        <div class="hint-text" id="hint-q1"></div>
+        <div class="btn-group">
+            <button onclick="wrongAnswer('hint-q1', 'Hmm... think about it again! 😜')">IDK</button>
+            <button onclick="handleCorrectAnswer('screen-q1', 'screen-q2')">DEFINITELY 👑</button>
+            <button onclick="wrongAnswer('hint-q1', 'Not quite! Try the middle one...')">Maybe</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 3: QUESTION 2 -->
+    <div id="screen-q2" class="card hidden">
+        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcTBicmJhN3gzcnNjcWh5YTh6cmtzMDBkM3k5Zms2YndmNGtuaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/elPffb8D6L9vG/giphy.gif" alt="Date GIF">
+        <h1>Question 2 🌹</h1>
+        <p>Would you go on a date with me?</p>
+        <div class="hint-text" id="hint-q2"></div>
+        <div class="btn-group">
+            <button onclick="wrongAnswer('hint-q2', 'Wrong answer! Try again. 👀')">No</button>
+            <button onclick="wrongAnswer('hint-q2', 'No partial points allowed!')">Maybe</button>
+            <button onclick="handleCorrectAnswer('screen-q2', 'screen-q3')">ABSOLUTELY 😍</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 4: QUESTION 3 -->
+    <div id="screen-q3" class="card hidden">
+        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHI3OGV3OXVlbW1nNmZidDRpdGZzOTdrZHExbzI4MWExOTQwa3J0bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/vN59S4oV7f2wB88oas/giphy.gif" alt="Love GIF">
+        <h1>Final Question! 💓</h1>
+        <p>Do I love you so much?</p>
+        <div class="hint-text" id="hint-q3"></div>
+        <div class="btn-group">
+            <button onclick="wrongAnswer('hint-q3', 'Way more than that! Try again.')">Yes</button>
+            <button onclick="wrongAnswer('hint-q3', 'Still too small! Go bigger! 🔥')">Yes!!</button>
+            <button onclick="handleCorrectAnswer('screen-q3', 'screen-gift')">YES, INFINITELY!! ♾️</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 5: UNOPENED GIFT BOX -->
+    <div id="screen-gift" class="card hidden">
+        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDVjOW90Ynp2NW5hbTdnYzM4aGg0eW5vOTVlYndndGdybW1wdmFzZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/u0S69g6T4p1Z28lD0L/giphy.gif" alt="Celebrate GIF">
+        <h1>You Won! 🏆</h1>
+        <p>You got a perfect score! Tap below to open your gift box...</p>
+        
+        <div class="gift-container" onclick="openGift()">
+            <span class="gift-box" id="gift-icon">🎁</span>
+        </div>
+
+        <div class="btn-group">
+            <button id="open-btn" onclick="openGift()">Open It 🎁</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 6: THE FINAL REVEAL -->
+    <div id="screen-reveal" class="card hidden">
+        <div class="letter-page">
+            <p class="love-message">
+                Happy Birthday my love!! <br><br>
+                I LOVE YOU SO MUCH <br>
+                <span class="highlight-name">MY RUBY! ❤️</span>
+            </p>
+        </div>
+    </div>
+
     <script>
-        // Quiz Data Architecture
-        const databaseQuiz = [
-            {
-                q: "Are you the best",
-                opts: ["yes", "maybe", "idk"],
-                ans: 0 // Index 0 matches "yes"
-            },
-            {
-                q: "Are you the best",
-                opts: ["yes", "YES", "YESSS"],
-                ans: 2 // Index 2 matches "YESSS"
-            },
-            {
-                q: "Do i love you so much",
-                opts: ["no", "is that a thing to ask", "maybe"],
-                ans: 1 // Index 1 matches "is that a thing to ask"
-            }
-        ];
+        // Core view switching logic
+        function nextScreen(currentId, nextId) {
+            document.getElementById(currentId).classList.add('hidden');
+            document.getElementById(nextId).classList.remove('hidden');
+        }
 
-        let indexPointer = 0;
+        // Inline smooth wrong answer system
+        function wrongAnswer(hintId, message) {
+            const hintElement = document.getElementById(hintId);
+            hintElement.innerText = message;
+        }
 
-        // Engine Page Routers
-        function actionStartQuiz() {
-            triggerConfettiBurst("mix");
+        // Triggers confetti shower and switches screen after a small visual delay
+        function handleCorrectAnswer(currentId, nextId) {
+            triggerConfettiBurst();
             setTimeout(() => {
-                document.getElementById('page-1').classList.add('hidden');
-                document.getElementById('page-2').classList.remove('hidden');
-                renderCurrentQuestion();
+                nextScreen(currentId, nextId);
+            }, 600);
+        }
+
+        function openGift() {
+            document.getElementById('gift-icon').innerHTML = "🔓";
+            triggerConfettiBurst(); 
+            setTimeout(function() {
+                nextScreen('screen-gift', 'screen-reveal');
             }, 400);
         }
 
-        function renderCurrentQuestion() {
-            const activeData = databaseQuiz[indexPointer];
-            document.getElementById('display-question').innerText = activeData.q;
+        // --- BACKGROUND CANVAS ENGINE (TWINKLING BLURRED SPARKLES) ---
+        const sparkleCanvas = document.getElementById('sparkle-canvas');
+        const sCtx = sparkleCanvas.getContext('2d');
+        const sparkles = [];
+
+        function initBackgroundSparkles() {
+            sparkleCanvas.width = window.innerWidth;
+            sparkleCanvas.height = window.innerHeight;
             
-            const container = document.getElementById('display-options-box');
-            container.innerHTML = '';
-
-            activeData.opts.forEach((label, idx) => {
-                const choiceBtn = document.createElement('button');
-                choiceBtn.className = 'btn';
-                choiceBtn.innerText = label;
-                choiceBtn.onclick = () => verifySelection(idx);
-                container.appendChild(choiceBtn);
-            });
-        }
-
-        function verifySelection(userIndex) {
-            const correctIndex = databaseQuiz[indexPointer].ans;
-            
-            if (userIndex === correctIndex) {
-                triggerConfettiBurst("mix");
-                indexPointer++;
-                
-                setTimeout(() => {
-                    if (indexPointer < databaseQuiz.length) {
-                        renderCurrentQuestion();
-                    } else {
-                        document.getElementById('page-2').classList.add('hidden');
-                        document.getElementById('page-3').classList.remove('hidden');
-                    }
-                }, 600);
-            } else {
-                alert("Opps! Try choosing another option! 😘");
-            }
-        }
-
-        function actionRevealGift() {
-            const giftBoxEl = document.getElementById('clickable-gift');
-            if (!giftBoxEl.classList.contains('opened')) {
-                giftBoxEl.classList.add('opened');
-                
-                // Fire dynamic looping hearts bursts
-                triggerConfettiBurst("hearts");
-                setTimeout(() => triggerConfettiBurst("hearts"), 300);
-                setTimeout(() => triggerConfettiBurst("hearts"), 600);
-
-                // Update UI layout element flags
-                document.getElementById('gift-action-btn').classList.add('hidden');
-                document.getElementById('final-bubble-text').classList.remove('hidden');
-            }
-        }
-
-        /* --- Dual-Mode Particle System (Confetti & Hearts) --- */
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
-        let activeParticles = [];
-
-        function scaleCanvasViewport() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener("resize", scaleCanvasViewport);
-        scaleCanvasViewport();
-
-        function triggerConfettiBurst(particleType) {
-            const totalCount = particleType === "hearts" ? 60 : 120;
-            const originX = canvas.width / 2;
-            const originY = canvas.height / 2 + 50;
-
-            for (let i = 0; i < totalCount; i++) {
-                activeParticles.push({
-                    x: originX,
-                    y: originY,
-                    type: particleType === "mix" ? (Math.random() > 0.4 ? "confetti" : "heart") : "heart",
-                    size: Math.random() * 8 + (particleType === "hearts" ? 10 : 5),
-                    color: particleType === "hearts" 
-                        ? `hsl(${Math.random() * 20 + 340}, 100%, ${Math.random() * 20 + 50}%)`
-                        : `hsl(${Math.random() * 360}, 90%, 60%)`,
-                    speedX: (Math.random() - 0.5) * 15,
-                    speedY: (Math.random() - 0.7) * 18,
-                    gravity: 0.3,
-                    opacity: 1,
-                    rotation: Math.random() * Math.PI,
-                    rotationSpeed: (Math.random() - 0.5) * 0.1
+            for (let i = 0; i < 40; i++) {
+                sparkles.push({
+                    x: Math.random() * sparkleCanvas.width,
+                    y: Math.random() * sparkleCanvas.height,
+                    radius: Math.random() * 6 + 4,
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.02 + 0.005,
+                    direction: Math.random() > 0.5 ? 1 : -1
                 });
             }
         }
 
-        function renderHeartShape(context, x, y, size) {
-            context.moveTo(x, y + size / 4);
-            context.quadraticCurveTo(x, y, x + size / 2, y);
-            context.quadraticCurveTo(x + size, y, x + size, y + size / 3);
-            context.quadraticCurveTo(x + size, y + (size * 2) / 3, x + size / 2, y + size);
-            context.quadraticCurveTo(x, y + (size * 2) / 3, x, y + size / 3);
-            context.quadraticCurveTo(x, y, x, y + size / 4);
+        function drawBackgroundSparkles() {
+            sCtx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
+            
+            sparkles.forEach(s => {
+                s.alpha += s.speed * s.direction;
+                if (s.alpha > 0.9) s.direction = -1;
+                if (s.alpha < 0.1) s.direction = 1;
+                
+                sCtx.save();
+                sCtx.beginPath();
+                sCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                
+                let gradient = sCtx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.radius);
+                gradient.addColorStop(0, `rgba(255, 230, 235, ${s.alpha})`);
+                gradient.addColorStop(0.4, `rgba(255, 180, 195, ${s.alpha * 0.4})`);
+                gradient.addColorStop(1, 'rgba(255, 180, 195, 0)');
+                
+                sCtx.fillStyle = gradient;
+                sCtx.fill();
+                sCtx.restore();
+            });
+            
+            requestAnimationFrame(drawBackgroundSparkles);
         }
 
-        function runParticleLoop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // --- SUCCESS SHOWER ENGINE (CONFETTI RAIN) ---
+        const confettiCanvas = document.getElementById('confetti-canvas');
+        const cCtx = confettiCanvas.getContext('2d');
+        let confettiParticles = [];
+        let animationFrameId = null;
 
-            for (let i = activeParticles.length - 1; i >= 0; i--) {
-                let p = activeParticles[i];
-                p.x += p.speedX;
-                p.y += p.speedY;
-                p.speedY += p.gravity;
-                p.opacity -= 0.015;
-                p.rotation += p.rotationSpeed;
-
-                ctx.save();
-                ctx.fillStyle = p.color;
-                ctx.globalAlpha = p.opacity;
-                ctx.translate(p.x, p.y);
-                ctx.rotate(p.rotation);
-
-                ctx.beginPath();
-                if (p.type === "heart") {
-                    renderHeartShape(ctx, -p.size/2, -p.size/2, p.size);
-                } else {
-                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 2);
-                }
-                ctx.fill();
-                ctx.restore();
-
-                if (p.opacity <= 0) {
-                    activeParticles.splice(i, 1);
-                }
+        function triggerConfettiBurst() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+            
+            const colors = ['#ff477e', '#ff7096', '#ffb3c6', '#ffd000', '#4cd137', '#00a8ff'];
+            
+            for (let i = 0; i < 75; i++) {
+                confettiParticles.push({
+                    x: Math.random() * confettiCanvas.width,
+                    y: -20,
+                    w: Math.random() * 8 + 5,
+                    h: Math.random() * 12 + 6,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speedY: Math.random() * 4 + 4,
+                    speedX: Math.random() * 4 - 2,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: Math.random() * 6 - 3
+                });
             }
-            requestAnimationFrame(runParticleLoop);
+            
+            if (!animationFrameId) {
+                runConfettiEngine();
+            }
         }
-        runParticleLoop();
+
+        function runConfettiEngine() {
+            cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            
+            confettiParticles.forEach((p, index) => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+                p.rotation += p.rotationSpeed;
+                
+                cCtx.save();
+                cCtx.translate(p.x, p.y);
+                cCtx.rotate((p.rotation * Math.PI) / 180);
+                cCtx.fillStyle = p.color;
+                cCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                cCtx.restore();
+                
+                if (p.y > confettiCanvas.height) {
+                    confettiParticles.splice(index, 1);
+                }
+            });
+            
+            if (confettiParticles.length > 0) {
+                animationFrameId = requestAnimationFrame(runConfettiEngine);
+            } else {
+                cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                animationFrameId = null;
+            }
+        }
+
+        // Global Initialization
+        window.addEventListener('load', () => {
+            initBackgroundSparkles();
+            drawBackgroundSparkles();
+        });
+
+        window.addEventListener('resize', () => {
+            sparkleCanvas.width = window.innerWidth;
+            sparkleCanvas.height = window.innerHeight;
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
