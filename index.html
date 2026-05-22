@@ -24,39 +24,27 @@
             overflow: hidden;
         }
 
-        /* FLOATING HEARTS BACKGROUND EFFECT */
-        .hearts-bg {
+        /* CANVAS OVERLAYS FOR PARTICLES */
+        #sparkle-canvas, #confetti-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
             pointer-events: none;
         }
-
-        .heart-particle {
-            position: absolute;
-            display: block;
-            font-size: 20px;
-            color: rgba(255, 71, 126, 0.2);
-            animation: floatUp 6s linear infinite;
-            bottom: -50px;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
-        }
+        
+        #sparkle-canvas { z-index: 1; }
+        #confetti-canvas { z-index: 100; }
 
         /* STYLISH MAIN CONTAINER */
         .card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             padding: 35px 25px;
             border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(255, 154, 178, 0.2);
+            box-shadow: 0 15px 35px rgba(255, 154, 178, 0.25);
             border: 1px solid rgba(255, 255, 255, 0.6);
             width: 100%;
             max-width: 380px;
@@ -88,9 +76,10 @@
 
         p {
             margin-bottom: 25px;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             line-height: 1.6;
-            color: #625c5e;
+            color: #554e50;
+            font-weight: 500;
         }
 
         .btn-group {
@@ -118,115 +107,300 @@
             box-shadow: 0 2px 8px rgba(255, 71, 126, 0.3);
         }
 
-        button.secondary {
-            background: transparent;
-            border: 2px solid #ffb3c6;
-            color: #ff477e;
-            box-shadow: none;
-        }
-
         .hidden { display: none !important; }
 
-        .letter-text {
-            text-align: left;
-            white-space: pre-line;
-            font-size: 1rem;
+        /* GIFT BOX ANIMATION EFFECTS */
+        .gift-container {
+            margin: 20px auto;
+            cursor: pointer;
+            position: relative;
+            width: 110px;
+            height: 110px;
+        }
+
+        .gift-box {
+            font-size: 85px;
+            line-height: 1;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .gift-container:hover .gift-box {
+            animation: wobble 0.5s ease infinite alternate;
+        }
+
+        @keyframes wobble {
+            0% { transform: rotate(-8deg); }
+            100% { transform: rotate(8deg); }
+        }
+
+        /* FINAL WISH PAGE STYLING */
+        .letter-page {
+            background: #fffdf9;
+            background-image: linear-gradient(#e7eff7 1px, transparent 1px);
+            background-size: 100% 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            padding: 35px 20px;
+            border: 1px solid #f1eae0;
+            position: relative;
+            animation: openLetter 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes openLetter {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .love-message {
+            font-size: 1.5rem;
+            font-weight: 700;
             line-height: 1.7;
-            color: #555;
-            background: rgba(255, 240, 243, 0.7);
-            padding: 22px;
-            border-radius: 16px;
-            border: 1px dashed #ff477e;
-            max-height: 250px;
-            overflow-y: auto;
+            color: #d93866;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
+            word-wrap: break-word;
+        }
+
+        .highlight-name {
+            display: block;
+            font-size: 1.9rem;
+            color: #ff1c5c;
+            margin-top: 12px;
+            letter-spacing: 1px;
+            animation: pulseText 1.5s infinite alternate;
+        }
+
+        @keyframes pulseText {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.04); }
         }
     </style>
 </head>
 <body>
 
-    <!-- BACKGROUND HEARTS ELEMENTS -->
-    <div class="hearts-bg">
-        <span class="heart-particle" style="left: 10%; animation-delay: 0s; animation-duration: 7s;">💖</span>
-        <span class="heart-particle" style="left: 30%; animation-delay: 2s; animation-duration: 6s;">✨</span>
-        <span class="heart-particle" style="left: 55%; animation-delay: 1s; animation-duration: 8s;">❤️</span>
-        <span class="heart-particle" style="left: 80%; animation-delay: 4s; animation-duration: 5s;">🌸</span>
-    </div>
+    <!-- BACKGROUND SPARKLES & FOREGROUND CONFETTI OVERLAYS -->
+    <canvas id="sparkle-canvas"></canvas>
+    <canvas id="confetti-canvas"></canvas>
 
     <!-- SCREEN 1: INTRO -->
     <div id="screen-intro" class="card">
-        <!-- Tip: Swap the src URL below with any cute GIF link from Giphy or Tenor! -->
-        <img class="quiz-gif" src="https://media1.tenor.com/m/GHt-XE_jP5UAAAAd/hobi-cake-hobi-birthday.gif" alt="Hearts Animation">
-        <h1>Your Game Awaits ✨</h1>
-        <p>A short quiz about us stands between you and your birthday surprise. Ready to play?</p>
+        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbW9zN3R5M3g0YmpxbW16eGkxMHp2Z3Fnd3Y4M3RndXNtcW90Zms3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/bZ7Uv6KcoI0vR6zBwO/giphy.gif" alt="Hearts Animation">
+        <h1>Happy Birthday bby! ✨</h1>
+        <p>If you win, you get a gift! Ready to start?</p>
         <div class="btn-group">
-            <button onclick="nextScreen('screen-intro', 'screen-q1')">Let's do it! 🚀</button>
-            <button class="secondary" onclick="funnyRefusal()">No thanks 🛑</button>
+            <button onclick="nextScreen('screen-intro', 'screen-q1')">Let's play! 🚀</button>
         </div>
     </div>
 
     <!-- SCREEN 2: QUESTION 1 -->
     <div id="screen-q1" class="card hidden">
-        <img class="quiz-gif" src="https://media1.tenor.com/m/5A9PgEUGOYoAAAAd/namjoon-namjoon-birthday.gif" alt="Thinking GIF">
+        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWdtczg5bDBpM2sycW04YmtvMXNma2xxZTZidTBlMTU4NXYxb2k3ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/XgXp0fId8p65Uas99e/giphy.gif" alt="Thinking GIF">
         <h1>Question 1 🤔</h1>
-        <p>Where did we first meet / hang out properly?</p>
+        <p>Are you the best?</p>
         <div class="btn-group">
-            <button onclick="wrongAnswer()">Option A (Change this)</button>
-            <button onclick="nextScreen('screen-q1', 'screen-q2')">The Correct Place 🎉</button>
-            <button onclick="wrongAnswer()">Option C (Change this)</button>
+            <button onclick="wrongAnswer()">IDK</button>
+            <button onclick="handleCorrectAnswer('screen-q1', 'screen-q2')">DEFINITELY</button>
+            <button onclick="wrongAnswer()">Maybe</button>
         </div>
     </div>
 
     <!-- SCREEN 3: QUESTION 2 -->
     <div id="screen-q2" class="card hidden">
-        <img class="quiz-gif" src="https://media1.tenor.com/m/sDXE-7Mbz_QAAAAd/jungkook-jimin.gif" alt="Food GIF">
-        <h1>Question 2 🍕</h1>
-        <p>What is my absolute favorite/least favorite food habit of yours?</p>
+        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcTBicmJhN3gzcnNjcWh5YTh6cmtzMDBkM3k5Zms2YndmNGtuaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/elPffb8D6L9vG/giphy.gif" alt="Date GIF">
+        <h1>Question 2 🌹</h1>
+        <p>Would you go on a date with me?</p>
         <div class="btn-group">
-            <button onclick="nextScreen('screen-q2', 'screen-q3')">The Real Answer 🏆</button>
-            <button onclick="wrongAnswer()">A Fake Answer</button>
-            <button onclick="wrongAnswer()">Another Fake Answer</button>
+            <button onclick="wrongAnswer()">No</button>
+            <button onclick="wrongAnswer()">Maybe</button>
+            <button onclick="handleCorrectAnswer('screen-q2', 'screen-q3')">ABSOLUTELY</button>
         </div>
     </div>
 
     <!-- SCREEN 4: QUESTION 3 -->
     <div id="screen-q3" class="card hidden">
-        <img class="quiz-gif" src="https://media1.tenor.com/m/62V8G5uZ1eUAAAAd/2skoo-2skoo-run-bts.gif" alt="Laughing GIF">
-        <h1>Final Question! 🔎</h1>
-        <p>What is the one inside joke we say completely too often?</p>
+        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHI3OGV3OXVlbW1nNmZidDRpdGZzOTdrZHExbzI4MWExOTQwa3J0bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/vN59S4oV7f2wB88oas/giphy.gif" alt="Love GIF">
+        <h1>Final Question! 💓</h1>
+        <p>Do I love you so much?</p>
         <div class="btn-group">
-            <button onclick="wrongAnswer()">Wrong Joke</button>
-            <button onclick="wrongAnswer()">Different Joke</button>
-            <button onclick="nextScreen('screen-q3', 'screen-success')">Our Main Inside Joke ❤️</button>
+            <button onclick="wrongAnswer()">Yes</button>
+            <button onclick="wrongAnswer()">Yes</button>
+            <button onclick="handleCorrectAnswer('screen-q3', 'screen-gift')">YES!!</button>
         </div>
     </div>
 
-    <!-- SCREEN 5: SUCCESS & LETTER -->
-    <div id="screen-success" class="card hidden">
-        <img class="quiz-gif" src="https://media1.tenor.com/m/R-0cvknFPysAAAAd/outtrojin.gif" alt="Celebrate GIF">
+    <!-- SCREEN 5: UNOPENED GIFT BOX -->
+    <div id="screen-gift" class="card hidden">
+        <img class="quiz-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDVjOW90Ynp2NW5hbTdnYzM4aGg0eW5vOTVlYndndGdybW1wdmFzZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/u0S69g6T4p1Z28lD0L/giphy.gif" alt="Celebrate GIF">
         <h1>You Won! 👑</h1>
-        <p>Here is your birthday letter:</p>
-        <div class="letter-text">
-            Happy Birthday! 🎂
+        <p>You got a perfect score! Tap below to uncover your gift box...</p>
+        
+        <div class="gift-container" onclick="openGift()">
+            <span class="gift-box" id="gift-icon">🎁</span>
+        </div>
 
-            Type out your long, meaningful message right here. 
-            
-            Because the box template has a tiny built-in scroll bar, you can write as much background context or sweet thoughts as you want without breaking the screen layout!
+        <div class="btn-group">
+            <button id="open-btn" onclick="openGift()">Open It 🎁</button>
+        </div>
+    </div>
+
+    <!-- SCREEN 6: THE FINAL REVEAL -->
+    <div id="screen-reveal" class="card hidden">
+        <div class="letter-page">
+            <p class="love-message">
+                Happy Birthday my love!! <br><br>
+                I LOVE YOU SO MUCH <br>
+                <span class="highlight-name">MY RUBY! ❤️</span>
+            </p>
         </div>
     </div>
 
     <script>
+        // Core view switching
         function nextScreen(currentId, nextId) {
             document.getElementById(currentId).classList.add('hidden');
             document.getElementById(nextId).classList.remove('hidden');
         }
 
-        function funnyRefusal() {
-            alert("Computer says no! You have to tap the other button. 😉");
+        function wrongAnswer() {
+            alert("Aww, incorrect! Think again. 😉");
         }
 
-        function wrongAnswer() {
-            alert("Aww, incorrect! Try another choice.");
+        // Triggers confetti shower and switches screen after a small visual delay
+        function handleCorrectAnswer(currentId, nextId) {
+            triggerConfettiBurst();
+            setTimeout(() => {
+                nextScreen(currentId, nextId);
+            }, 600);
         }
+
+        function openGift() {
+            document.getElementById('gift-icon').innerHTML = "🔓";
+            triggerConfettiBurst(); // Extra celebration burst on open
+            setTimeout(function() {
+                nextScreen('screen-gift', 'screen-reveal');
+            }, 400);
+        }
+
+        // --- BACKGROUND CANVAS ENGINE (TWINKLING BLURRED SPARKLES) ---
+        const sparkleCanvas = document.getElementById('sparkle-canvas');
+        const sCtx = sparkleCanvas.getContext('2d');
+        const sparkles = [];
+
+        function initBackgroundSparkles() {
+            sparkleCanvas.width = window.innerWidth;
+            sparkleCanvas.height = window.innerHeight;
+            
+            for (let i = 0; i < 40; i++) {
+                sparkles.push({
+                    x: Math.random() * sparkleCanvas.width,
+                    y: Math.random() * sparkleCanvas.height,
+                    radius: Math.random() * 6 + 4,
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.02 + 0.005,
+                    direction: Math.random() > 0.5 ? 1 : -1
+                });
+            }
+        }
+
+        function drawBackgroundSparkles() {
+            sCtx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
+            
+            sparkles.forEach(s => {
+                s.alpha += s.speed * s.direction;
+                if (s.alpha > 0.9) s.direction = -1;
+                if (s.alpha < 0.1) s.direction = 1;
+                
+                sCtx.save();
+                sCtx.beginPath();
+                sCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                
+                // Creates a dreamy blurred look
+                let gradient = sCtx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.radius);
+                gradient.addColorStop(0, `rgba(255, 230, 235, ${s.alpha})`);
+                gradient.addColorStop(0.4, `rgba(255, 180, 195, ${s.alpha * 0.4})`);
+                gradient.addColorStop(1, 'rgba(255, 180, 195, 0)');
+                
+                sCtx.fillStyle = gradient;
+                sCtx.fill();
+                sCtx.restore();
+            });
+            
+            requestAnimationFrame(drawBackgroundSparkles);
+        }
+
+        // --- SUCCESS SHOWER ENGINE (CONFETTI RAIN) ---
+        const confettiCanvas = document.getElementById('confetti-canvas');
+        const cCtx = confettiCanvas.getContext('2d');
+        let confettiParticles = [];
+        let animationFrameId = null;
+
+        function triggerConfettiBurst() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+            
+            const colors = ['#ff477e', '#ff7096', '#ffb3c6', '#ffd000', '#4cd137', '#00a8ff'];
+            
+            // Inject new batch of falling ribbons
+            for (let i = 0; i < 75; i++) {
+                confettiParticles.push({
+                    x: Math.random() * confettiCanvas.width,
+                    y: -20,
+                    w: Math.random() * 8 + 5,
+                    h: Math.random() * 12 + 6,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speedY: Math.random() * 4 + 4,
+                    speedX: Math.random() * 4 - 2,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: Math.random() * 6 - 3
+                });
+            }
+            
+            if (!animationFrameId) {
+                runConfettiEngine();
+            }
+        }
+
+        function runConfettiEngine() {
+            cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            
+            confettiParticles.forEach((p, index) => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+                p.rotation += p.rotationSpeed;
+                
+                cCtx.save();
+                cCtx.translate(p.x, p.y);
+                cCtx.rotate((p.rotation * Math.PI) / 180);
+                cCtx.fillStyle = p.color;
+                cCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                cCtx.restore();
+                
+                // Clear single entities once they fly off base frame
+                if (p.y > confettiCanvas.height) {
+                    confettiParticles.splice(index, 1);
+                }
+            });
+            
+            if (confettiParticles.length > 0) {
+                animationFrameId = requestAnimationFrame(runConfettiEngine);
+            } else {
+                cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                animationFrameId = null;
+            }
+        }
+
+        // Global Initialization
+        window.addEventListener('load', () => {
+            initBackgroundSparkles();
+            drawBackgroundSparkles();
+        });
+
+        window.addEventListener('resize', () => {
+            sparkleCanvas.width = window.innerWidth;
+            sparkleCanvas.height = window.innerHeight;
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
